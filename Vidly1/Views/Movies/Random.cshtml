@@ -1,10 +1,14 @@
-﻿@model Vidly1.Models.Movie
+﻿<!--180803 20:36 po dodaniu i modyfikacji z View na ViewModel należy zmienić scieżkę z model Vidly1.Models.Movie-->
+@model Vidly1.ViewModels.RandomMovieViewModel
+
 @{
     ViewBag.Title = "Random";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!--180803 19:50 zamiast używać Model.Name sotsujemy nowe dane na podstawie tego co było w movie controller. Ale to złe podejści, nieistotne. Tak jak wcześniej jest okej-->
-
-<h2>@Model.Name</h2>
+<!--180803 20:36 zmiana ta powoduje, że musimy zmienić odwołanie z Name na-->
+<h2>@Model.Movie.Name</h2>
+<!--180803 20:36 dodajemy również odwołanie do customers-->
+@Model.Customers
 

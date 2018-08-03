@@ -5,6 +5,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using Vidly1.Models;
+using Vidly1.ViewModels;
 
 namespace Vidly1.Controllers
 {
@@ -14,18 +15,32 @@ namespace Vidly1.Controllers
         //zwraca nam akcje i zazwyczaj jest to widok, ale sa też inne możliwości.
         public ActionResult Random()
         {
-            var movie = new Movie() {Name = "Shrek!"};
+            var movie_var = new Movie() {Name = "Shrek!"};
             //180803 19:40 Zamiast dodawać w argumencie widoku, korzystamy ze slownika  dodając akcje. TO JEST ZŁE PODEJŚCIE, FORGET
             //ViewData["Movie"] = movie;
 
+
+            //            return Content("Hello World!"); //http://localhost:61631/movies/random daje nam rezultat
+            //            return HttpNotFound(); ctrl+shift+b dla budowania bez otwierania w nowej aplikacji
+            //            return RedirectToAction("Index", "Home", new {page = 1, sortBy = "name"}); //dodajemy nazwe akcji (Index) i kontroler (Home), który ma zostać wykorzystany do przekierowania, możemy też dodać anonimowy obiekt ( {} ) jako argument, który znajdzie sie w adresie strony : localhost:61631/movies/Random
+
+
+            //180803 20:06 lista customers na potrzeby RandomMovieViewModel. PO tym należy nanieść zmiany w Random
+            var customer_var = new List<Customer>
+            {
+                new Customer {Name = "Customer1"},
+                new Customer {Name = "Customer2"}
+            };
+
+            var viewModel = new RandomMovieViewModel
+            {
+                Movie = movie_var,
+                Customers = customer_var
+            };
+
             //180803 19:58 to jest najlepszy approach
-            return View(movie);
-//            return Content("Hello World!"); //http://localhost:61631/movies/random daje nam rezultat
-//            return HttpNotFound(); ctrl+shift+b dla budowania bez otwierania w nowej aplikacji
-//            return RedirectToAction("Index", "Home", new {page = 1, sortBy = "name"}); //dodajemy nazwe akcji (Index) i kontroler (Home), który ma zostać wykorzystany do przekierowania, możemy też dodać anonimowy obiekt ( {} ) jako argument, który znajdzie sie w adresie strony : localhost:61631/movies/Random
+            return View(viewModel);
 
-
-            //180803 19.40 Za
 
         }
 
