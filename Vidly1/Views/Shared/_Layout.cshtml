@@ -8,22 +8,22 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-@*180903 21:05
-    tutaj odnosimy się do partial view
-    stworzylismy go na potrzeby navbar i jest w Views/Shared/_NavBar
-    tutaj umieszczamy jedynie odwołanie do niego 
-*@
-@Html.Partial("_NavBar")
-<div class="container body-content">
-    @RenderBody()
-    <hr/>
-    <footer>
-        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-    </footer>
-</div>
+    @*180903 21:05
+        tutaj odnosimy się do partial view
+        stworzylismy go na potrzeby navbar i jest w Views/Shared/_NavBar
+        tutaj umieszczamy jedynie odwołanie do niego
+    *@
+    @Html.Partial("_NavBar")
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
 
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/bootstrap")
-@RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </body>
 </html>

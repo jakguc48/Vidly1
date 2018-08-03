@@ -70,7 +70,37 @@ namespace Vidly1.Controllers
         public ActionResult ByReleaseDate(int year, int month)
         {
             return Content(year + "/" + month);
-        } 
+        }
+
+        [Route("Customers")]
+        public ActionResult Customers()
+        {
+            var customers_v = new List<Customer>
+            {
+                new Customer {Id = 1, Name = "John Smith"},
+                new Customer {Id = 2, Name = "Marry Williams"}
+
+            };
+
+            var ViewModel = new CustomersViewModel()
+            {
+                Customers = customers_v
+            };
+            return View(ViewModel);
+        }
+
+        [Route("Customers/Details/{id:regex(\\d)}")]
+        public ActionResult Details(int Id)
+        {
+
+            var ViewModel = new CustomerDetailsViewModel()
+            {
+                Custom = new Customer { Id = 1, Name = "John Smith" }
+            };
+            return View(ViewModel);
+
+
+        }
 
     }
 }
