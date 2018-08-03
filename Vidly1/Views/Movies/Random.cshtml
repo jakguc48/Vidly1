@@ -6,9 +6,37 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+<!--180803 20:48-->
+<!--180803 20:40 dodajemy również odwołanie do customers i korzystamy z możliwości View Razor engine, czyli miks c# i html-->
 <!--180803 19:50 zamiast używać Model.Name sotsujemy nowe dane na podstawie tego co było w movie controller. Ale to złe podejści, nieistotne. Tak jak wcześniej jest okej-->
 <!--180803 20:36 zmiana ta powoduje, że musimy zmienić odwołanie z Name na-->
-<h2>@Model.Movie.Name</h2>
-<!--180803 20:36 dodajemy również odwołanie do customers-->
-@Model.Customers
+<!--180803 20:48 jesli chcemy manipulowac elementami html mozemy uzywac do tego c# np zamiast <h2>Model.Movie.Name</h2> -->
 
+
+<!--180803 20:48 dodajemy nowy kod c# odpowiadajacy za warunek clasy-->
+<!--180803 20:48 jesli liczba customerow jest wieksza niz 5 to obiekt className przyjmuje wartosc "popular", jesli nie to null-->
+@{
+    var className = Model.Customers.Count > 1 ? "popular" : null;
+}
+
+<h2 class="@className">@Model.Movie.Name</h2>
+@*
+    LEPSZY SPOSOB NA KOMENTOWANIE    
+*@
+
+<!--180803 20:40 chcemy dodac komunikat, ze nikt nie wypożyczyl wczesniej tego filmu-->
+@if (Model.Customers.Count == 0)
+{
+    <p>No one has rented this movie before.</p>
+}
+else
+{
+    <!--180803 20:40 chcemy wyswietlac customerow jako elementy listy. dlatego wczesniej tworzymy liste htmnl-->
+    <ul>
+        @foreach (var Customer in Model.Customers)
+        {
+            <li>@Customer.Name</li>
+        }
+    </ul>
+}
