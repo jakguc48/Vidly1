@@ -43,7 +43,8 @@ namespace Vidly1.Controllers
             return Content(String.Format("PageIndex={0}&SortBy={1}", PageIndex, SortBy));
         }
 
-
+        //przenosimy to co wczesniej było w routeconfig. mozliwe jest nadanie kilku constr, dla wartosci i dodatkowe mozliwosci sa wspierane jak range
+        [Route("movies/released/{year:regex(\\d{4})}/{month:regex(\\d{2}):range(1, 12)}")]
         public ActionResult ByReleaseDate(int year, int month)
         {
             return Content(year + "/" + month);
