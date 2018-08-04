@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
@@ -100,6 +101,24 @@ namespace Vidly1.Controllers
             return View(ViewModel);
 
 
+        }
+
+        [Route("Movies")]
+        public ActionResult Mov()
+        {
+
+            var mov_list = new List<Movie>
+            {
+                new Movie {Id = 1, Name = "Shrek!"},
+                new Movie {Id = 2, Name = "Kung fu Panda"}
+            };
+
+            var ViewMod = new MoviesViewModel()
+            {
+                Movies = mov_list
+                
+            };
+            return View(ViewMod);
         }
 
     }
