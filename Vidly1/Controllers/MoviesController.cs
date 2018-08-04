@@ -12,6 +12,11 @@ namespace Vidly1.Controllers
 {
     public class MoviesController : Controller
     {
+        public static List<Customer> customers_v = new List<Customer>{           
+            new Customer { Id = 1, Name = "John Smith" },
+            new Customer { Id = 2, Name = "Marry Williams" }
+
+        };
         // GET: Movies
         //zwraca nam akcje i zazwyczaj jest to widok, ale sa też inne możliwości.
         public ActionResult Random()
@@ -76,18 +81,36 @@ namespace Vidly1.Controllers
         [Route("Customers")]
         public ActionResult Customers()
         {
-            var customers_v = new List<Customer>
-            {
-                new Customer {Id = 1, Name = "John Smith"},
-                new Customer {Id = 2, Name = "Marry Williams"}
+            //var customers_v = new List<Customer>
+            //{
+            //    new Customer { Id = 1, Name = "John Smith" },
+            //    new Customer { Id = 2, Name = "Marry Williams" }
 
-            };
+            //};
 
-            var ViewModel = new CustomersViewModel()
+            //customers_v.Add(new Customer {Id = 1, Name = "John Smith"});
+            //customers_v.Add(new Customer { Id = 2, Name = "Marry Williams" });
+
+            var ViewModel1 = new CustomersViewModel()
             {
                 Customers = customers_v
             };
-            return View(ViewModel);
+
+            //if (Id.HasValue)
+            //{
+            //    var ViewModel2 = new CustomerDetailsViewModel()
+            //    {
+            //        Custom = customers_v[Id.Value]
+            //    };
+
+            //    return View(ViewModel2);
+            //}
+
+                return View(ViewModel1);
+            
+        
+         
+           
         }
 
         [Route("Customers/Details/{id:regex(\\d)}")]
@@ -96,7 +119,7 @@ namespace Vidly1.Controllers
 
             var ViewModel = new CustomerDetailsViewModel()
             {
-                Custom = new Customer { Id = 1, Name = "John Smith" }
+                Custom = customers_v.Find(x => x.Id.Equals(Id))
             };
             return View(ViewModel);
 
